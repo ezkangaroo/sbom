@@ -33,9 +33,22 @@ execute() {
     binexe="${binexe}.exe"
   fi
 
-  log_info "(installing binary) moving or copying from: $srcdir$binexe to $BINDIR/"
-  mv "${srcdir}${binexe}" "${BINDIR}${binexe}" 2> /dev/null || sudo cp "${srcdir}${binexe}" "${BINDIR}/"
-  log_info "(installed) ${BINDIR}/${binexe}"  
+  log_info "(installing binary) moving or copying from: $srcdir/$binexe to $BINDIR/$binexe"
+
+  if [ -e "${BINDIR}/${binexe}" ]; then
+    log_info "(installing binary) $binexe already exists at: $BINDIR/$binexe, trying to replace"
+    mv -f "${srcdir}/${binexe}" "${BINDIR}/${binexe}"
+  else
+    cp "${srcdir}/${binexe}" "${BINDIR}/${binexe}" 2> /dev/null || sudo cp "${srcdir}/${binexe}" "${BINDIR}/"
+  fi
+
+  if [ -e "${BINDIR}/${binexe}" ]; then
+    log_info "(installed) ${BINDIR}/${binexe}"  
+  else
+    log_info "(!!!!) Failed to install at: ${BINDIR}/${binexe}"
+    exit 1
+  fi
+  
 }
 
 is_supported_platform() {
