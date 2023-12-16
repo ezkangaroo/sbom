@@ -25,7 +25,7 @@ impl SetupToolProject {
 }
 
 pub fn discover_setuptools(target: &Path) -> Vec<Box<dyn Scannable>> {
-    let pattern = format!("{}/**/*.txt", target.display());
+    let pattern = format!("{}/**/*requirements.txt", target.display());
 
     let (found, _failure): (Vec<_>, Vec<_>) = glob(pattern.as_str())
         .expect("to compile glob")
