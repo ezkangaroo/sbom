@@ -1,5 +1,5 @@
 use super::analyze::{AnalysisError, AnalysisUnit, ProjectTarget};
-use crate::cli::opts::APP_VERSION;
+use clap::crate_version;
 use serde::Serialize;
 
 #[derive(Debug, Serialize)]
@@ -32,8 +32,9 @@ impl Unit {
 
 impl Units {
     pub fn summrize(&self) {
+        let version = crate_version!();
         println!("\n");
-        println!("sbom cli version: {APP_VERSION}\n");
+        println!("sbom cli version: {version}\n");
 
         for unit in self.0.iter() {
             println!("- {}", unit.summarize())

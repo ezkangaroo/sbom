@@ -1,13 +1,10 @@
-use clap::Parser;
-use git_version::git_version;
+use clap::{crate_version, Parser};
 use path_clean::PathClean;
 use std::{
     env, io,
     path::{Path, PathBuf},
 };
 use tracing::Level;
-
-pub const APP_VERSION: &str = git_version!();
 
 #[derive(Debug, Clone, Copy, clap::ValueEnum)]
 pub enum Verbosity {
@@ -33,7 +30,7 @@ pub enum ScanOutputFormat {
 }
 
 #[derive(Parser, Debug)]
-#[clap(author = "Humans", about = "Software Bill of Materials CLI", version=APP_VERSION)]
+#[clap(author = "Humans", about = "Software Bill of Materials CLI", version=crate_version!())]
 pub struct Cli {
     #[clap(subcommand)]
     pub cmd: Command,

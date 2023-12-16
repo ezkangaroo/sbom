@@ -13,6 +13,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - run: python .github/update-version.py
+        env:
+          VERSION: ${{ github.ref_name }}
+
       - uses: taiki-e/create-gh-release-action@v1
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
@@ -34,6 +38,9 @@ jobs:
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v4
+      - run: python .github/update-version.py
+        env:
+          VERSION: ${{ github.ref_name }}
       - uses: taiki-e/upload-rust-binary-action@v1
         with:
           bin: 'sbom'
@@ -46,6 +53,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - run: gh release edit ${{ github.ref_name }} --draft=false
+      - run: gh release edit ${{ github.ref_name }} --draft=true
         env:
           GH_TOKEN: ${{ github.token }}
