@@ -1,0 +1,19 @@
+name: install
+on: push
+
+jobs:
+  linux-install:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: |
+            ./install.sh
+            sbom --version
+
+  macOs-install:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: |
+            ./install.sh
+            sbom --version
