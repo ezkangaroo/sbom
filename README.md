@@ -1,5 +1,12 @@
 # sbom
-Software bill of material
+Identify dependencies from manifests
+
+# install
+
+```sh
+# macOs or linux
+curl https://raw.githubusercontent.com/ezkangaroo/sbom/master/install.sh | bash
+```
 
 # usage
 ```sh
