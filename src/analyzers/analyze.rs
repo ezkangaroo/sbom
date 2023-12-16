@@ -77,6 +77,7 @@ pub trait Analyzer<P> {
 
 pub trait Analyzable {
     fn analyze(&self) -> Result<AnalysisUnit, AnalysisError>;
+    fn to_target(&self) -> ProjectTarget;
 }
 
 pub trait Scannable: Analyzable {}

@@ -7,7 +7,7 @@ use std::{
 };
 use tracing::Level;
 
-const GIT_VERSION: &str = git_version!();
+pub const APP_VERSION: &str = git_version!();
 
 #[derive(Debug, Clone, Copy, clap::ValueEnum)]
 pub enum Verbosity {
@@ -33,7 +33,7 @@ pub enum ScanOutputFormat {
 }
 
 #[derive(Parser, Debug)]
-#[clap(author = "Humans", about = "Software Bill of Materials CLI", version=GIT_VERSION)]
+#[clap(author = "Humans", about = "Software Bill of Materials CLI", version=APP_VERSION)]
 pub struct Cli {
     #[clap(subcommand)]
     pub cmd: Command,

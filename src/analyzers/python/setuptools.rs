@@ -22,14 +22,6 @@ impl SetupToolProject {
             .expect("parent directory")
             .to_path_buf()
     }
-
-    pub fn to_project_target(&self) -> ProjectTarget {
-        ProjectTarget::builder()
-            .dir(self.base_dir())
-            .manifest(self.manifest.clone())
-            .kind(ProjectTargetKind::Setuptools)
-            .build()
-    }
 }
 
 pub fn discover_setuptools(target: &Path) -> Vec<Box<dyn Scannable>> {
@@ -53,6 +45,14 @@ pub fn discover_setuptools(target: &Path) -> Vec<Box<dyn Scannable>> {
 impl Scannable for SetupToolProject {}
 
 impl Analyzable for SetupToolProject {
+    fn to_target(&self) -> ProjectTarget {
+        ProjectTarget::builder()
+            .dir(self.base_dir())
+            .manifest(self.manifest.clone())
+            .kind(ProjectTargetKind::Setuptools)
+            .build()
+    }
+
     fn analyze(&self) -> Result<AnalysisUnit, AnalysisError> {
         let mut errs = Vec::default();
         let analyzers = vec![PipListAnalyzer];

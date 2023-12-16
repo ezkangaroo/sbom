@@ -9,6 +9,7 @@ pub mod io {
 
 pub mod analyzers {
     pub mod analyze;
+    pub mod spec;
     pub mod python {
         pub mod setuptools;
         pub mod utils {

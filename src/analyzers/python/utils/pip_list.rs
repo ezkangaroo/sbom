@@ -1,7 +1,7 @@
 use serde::{Deserialize, Serialize};
 
 use crate::analyzers::analyze::{
-    AnalysisUnit, AnalyzeKind, Analyzer, AnalyzerError, Dependency, DependencyKind,
+    AnalysisUnit, Analyzable, AnalyzeKind, Analyzer, AnalyzerError, Dependency, DependencyKind,
 };
 use crate::analyzers::python::setuptools::SetupToolProject;
 use crate::io::cmd::cmd_json;
@@ -50,7 +50,7 @@ impl Analyzer<SetupToolProject> for PipListAnalyzer {
 
         Ok(AnalysisUnit::builder()
             .analyzer((&self.name()).to_string())
-            .project(project.to_project_target())
+            .project(project.to_target())
             .graph(g)
             .build())
     }
